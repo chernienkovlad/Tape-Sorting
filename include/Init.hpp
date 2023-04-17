@@ -37,14 +37,14 @@ class ConfigParam
                 delay_config_file.close();
             }
 
-            std::ifstream memory_config_file(config_files_dir + "/" + MEMORY_CONFIG_FILENAME);
+            std::ifstream memory_config_file(config_files_dir + MEMORY_CONFIG_FILENAME);
             if (memory_config_file.is_open())
             {
                 std::string tmp_s;
                 memory_config_file >> tmp_s;
                 if (tmp_s == "memory_size")
                 {
-                    memory_config_file >> memory_size_;
+                    memory_config_file >> memory_size_in_bytes_;
                 }
                 memory_config_file.close();
             }
@@ -56,7 +56,7 @@ class ConfigParam
         double get_read_delay();
         double get_rewind_delay();
         double get_shift_delay();
-        unsigned long get_memory_size();
+        unsigned long get_memory_size_in_bytes();
 
     private:
         struct DelayValues
@@ -67,7 +67,7 @@ class ConfigParam
             double shift_delay_ = 0;
         };
         DelayValues delays_;
-        unsigned long memory_size_ = 0;
+        unsigned long memory_size_in_bytes_ = 0;
 };
 
 #endif // INIT_H_

@@ -20,7 +20,7 @@ double ConfigParam::get_shift_delay()
     return delays_.shift_delay_;
 }
 
-unsigned long ConfigParam::get_memory_size()
+unsigned long ConfigParam::get_memory_size_in_bytes()
 {
-    return memory_size_;
+    return memory_size_in_bytes_; 
 }

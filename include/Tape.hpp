@@ -16,6 +16,8 @@ class TapeInterface
         virtual void rewind(long long distance) = 0;
         virtual unsigned long capacity() = 0;
         virtual unsigned long position() = 0;
+        virtual bool is_out_of_bounds() = 0;
+        virtual void tape_to_file(std::string output_file_path) = 0;
 };
 
 class Tape: public TapeInterface
@@ -36,6 +38,11 @@ class Tape: public TapeInterface
             }
         }
 
+        Tape(unsigned long capacity)
+        {
+            memory_.resize(capacity);
+        }
+
         ~Tape() {}
 
         int read();
@@ -45,10 +52,13 @@ class Tape: public TapeInterface
         void rewind(long long distance);
         unsigned long capacity();
         unsigned long position();
+        bool is_out_of_bounds();
+        void tape_to_file(std::string output_file_path);
         
         private:
             std::vector<int> memory_;
             unsigned long iterator_ = 0;
+            bool out_of_bounds = false;
 };
 
 #endif // TAPE_H_
